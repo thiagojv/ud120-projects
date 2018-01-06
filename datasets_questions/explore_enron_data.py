@@ -21,14 +21,18 @@ import math
 enron_data = pickle.load(open("final_project/final_project_dataset.pkl", "r"))
 
 # How many data points (people) are in the dataset?
-print("1 -> " + str(len(enron_data.keys())))
+people = enron_data.keys()
+people_count = len(people)
+print("1 -> " + str(people_count))
 
 # For each data point (person) how many features are available?
 print("2 -> " + str(len(enron_data.values()[0].keys())))
 
 # How many POIs are in the dataset?
 # data[person_name]["poi"]==1
-print("3 -> " + str(len(list(v for v in enron_data.values() if v["poi"] == 1))))
+poi = list(v for v in enron_data.values() if v["poi"] == 1)
+poi_count = len(list(v for v in enron_data.values() if v["poi"] == 1))
+print("3 -> " + str(poi_count))
 
 # What is the total value of the stock belonging to James Prentice?
 print("4 - PRENTICE JAMES total_stock_value -> " + str(enron_data["PRENTICE JAMES"]["total_stock_value"]))
@@ -47,3 +51,15 @@ print("7 - FASTOW ANDREW S total_payments -> " + str(enron_data["FASTOW ANDREW S
 # How many folks in this dataset have a quantified salary? Known email address?
 print("8 -> " + str(len(list(v for v in enron_data.values() if math.isnan(float(v["salary"])) == 0))))
 print("8 -> " + str(len(list(v for v in enron_data.values() if v["email_address"] != "NaN"))))
+
+# How many people in the E+F dataset (as it currently exists) have “NaN” for their total payments?
+# What percentage of people in the dataset as a whole is this?
+people_without_total_payments = len(list(v for v in enron_data.values() if math.isnan(float(v["total_payments"])) == 1))
+print("9 -> " + str(people_without_total_payments))
+print("9 -> " + str(float(people_without_total_payments) / float(people_count)))
+
+# How many POIs in the E+F dataset have “NaN” for their total payments?
+# What percentage of POI’s as a whole is this?
+poi_without_total_payments = len(list(v for v in poi if math.isnan(float(v["total_payments"])) == 1))
+print("10 -> " + str(poi_without_total_payments))
+print("10 -> " + str(float(poi_without_total_payments) / float(poi_count)))
