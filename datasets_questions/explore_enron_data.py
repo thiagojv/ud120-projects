@@ -56,3 +56,16 @@ fskj = enron_data["SKILLING JEFFREY K"]
 sskj = pd.Series(fskj)
 print(sskj)
 print(fskj["exercised_stock_options"])
+
+# Of these three individuals (Lay, Skilling and Fastow), who took home the most money (largest value of “total_payments” feature)?
+flk = enron_data["LAY KENNETH L"]
+slk = pd.Series(flk)
+print(slk)
+
+ffa = enron_data["FASTOW ANDREW S"]
+sfa = pd.Series(ffa)
+print(sfa)
+
+print(fskj["total_payments"])
+print(flk["total_payments"])
+print(ffa["total_payments"])
